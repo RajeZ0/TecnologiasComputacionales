@@ -23,7 +23,7 @@ Para verlo mientras programo uso:
 ```bash
 npm run dev
 ```
-Luego abro http://localhost:3000 y listo. Cada cambio se refresca solo.
+Luego abro http://localhost:8080 y listo. Cada cambio se refresca solo.
 
 ## 4. Chequeos antes de entregar
 Para asegurarme de que no rompa nada:
