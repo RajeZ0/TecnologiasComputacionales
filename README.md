@@ -37,9 +37,8 @@ Si ambos comandos pasan, significa que el Docker build también va a salir sin e
 El Dockerfile genera el modo `standalone` de Next y solo requiere Node dentro del contenedor. Los pasos que seguí fueron:
 ```bash
 docker build -t uaemex-electronics .
-docker run -d -p 3000:3000 --name uaemex-electronics uaemex-electronics
+docker run -d -p 8080:8080 --name uaemex-electronics uaemex-electronics
 ```
-Con eso queda disponible en el puerto 3000 del servidor. Si quiere exponerlo en el puerto 80 puede cambiar a `-p 80:3000` o ponerlo detrás de un proxy.
 
 ## 6. Estructura rápida
 - `app/`: rutas y secciones principales (App Router).
