@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Search, Filter, Grid, List } from "lucide-react"
@@ -13,7 +13,7 @@ const allProducts = [
   // Componentes Pasivos
   {
     id: 1,
-    name: "Resistencias de Carbón 1/4W",
+    name: "Resistencias de CarbÃ³n 1/4W",
     category: "Componentes Pasivos",
     price: 25.0,
     originalPrice: 30.0,
@@ -24,11 +24,11 @@ const allProducts = [
   },
   {
     id: 2,
-    name: "Capacitores Electrolíticos",
+    name: "Capacitores ElectrolÃ­ticos",
     category: "Componentes Pasivos",
     price: 45.0,
     image: "/electronic-resistors-capacitors-components.jpg",
-    description: "Set de capacitores de 10µF a 1000µF",
+    description: "Set de capacitores de 10ÂµF a 1000ÂµF",
     inStock: true,
     isOffer: false,
   },
@@ -50,7 +50,7 @@ const allProducts = [
     price: 320.0,
     originalPrice: 380.0,
     image: "/arduino-uno-microcontroller-board-blue-electronic.jpg",
-    description: "Microcontrolador para proyectos de ingeniería",
+    description: "Microcontrolador para proyectos de ingenierÃ­a",
     inStock: true,
     isOffer: true,
   },
@@ -60,7 +60,7 @@ const allProducts = [
     category: "Componentes Activos",
     price: 35.0,
     image: "/electronic-transistors-components-black-plastic-to.jpg",
-    description: "Kit de transistores para amplificación",
+    description: "Kit de transistores para amplificaciÃ³n",
     inStock: true,
     isOffer: false,
   },
@@ -70,15 +70,15 @@ const allProducts = [
     category: "Componentes Activos",
     price: 120.0,
     image: "/electronic-transistors-diodes-integrated-circuits.jpg",
-    description: "Serie completa de compuertas lógicas",
+    description: "Serie completa de compuertas lÃ³gicas",
     inStock: false,
     isOffer: false,
   },
-  // Fuentes de Energía
+  // Fuentes de EnergÃ­a
   {
     id: 7,
     name: "Fuente Variable 0-30V",
-    category: "Fuentes de Energía",
+    category: "Fuentes de EnergÃ­a",
     price: 850.0,
     originalPrice: 950.0,
     image: "/batteries-power-supplies-breadboard-electronic.jpg",
@@ -88,33 +88,33 @@ const allProducts = [
   },
   {
     id: 8,
-    name: "Baterías Recargables Li-ion",
-    category: "Fuentes de Energía",
+    name: "BaterÃ­as Recargables Li-ion",
+    category: "Fuentes de EnergÃ­a",
     price: 180.0,
     image: "/batteries-power-supplies-breadboard-electronic.jpg",
-    description: "Pack de 4 baterías 18650 con cargador",
+    description: "Pack de 4 baterÃ­as 18650 con cargador",
     inStock: true,
     isOffer: false,
   },
-  // Instrumentación
+  // InstrumentaciÃ³n
   {
     id: 9,
-    name: "Multímetro Digital Fluke",
-    category: "Instrumentación",
+    name: "MultÃ­metro Digital Fluke",
+    category: "InstrumentaciÃ³n",
     price: 1200.0,
     originalPrice: 1400.0,
     image: "/digital-multimeter-yellow-black-electronic-measure.jpg",
-    description: "Multímetro profesional de alta precisión",
+    description: "MultÃ­metro profesional de alta precisiÃ³n",
     inStock: true,
     isOffer: true,
   },
   {
     id: 10,
     name: "Osciloscopio USB 2 Canales",
-    category: "Instrumentación",
+    category: "InstrumentaciÃ³n",
     price: 2500.0,
     image: "/multimeter-oscilloscope-electronic-measurement-too.jpg",
-    description: "Osciloscopio portátil para análisis de señales",
+    description: "Osciloscopio portÃ¡til para anÃ¡lisis de seÃ±ales",
     inStock: true,
     isOffer: false,
   },
@@ -136,7 +136,7 @@ const allProducts = [
     price: 40.0,
     originalPrice: 50.0,
     image: "/colorful-jumper-wires-cables-electronic-connection.jpg",
-    description: "Set de 120 cables de conexión",
+    description: "Set de 120 cables de conexiÃ³n",
     inStock: true,
     isOffer: true,
   },
@@ -146,8 +146,8 @@ const categories = [
   "Todos",
   "Componentes Pasivos",
   "Componentes Activos",
-  "Fuentes de Energía",
-  "Instrumentación",
+  "Fuentes de EnergÃ­a",
+  "InstrumentaciÃ³n",
   "Accesorios",
 ]
 
@@ -168,6 +168,7 @@ export function ProductsPage() {
     return matchesSearch && matchesCategory && matchesOffers
   })
 
+
   const addToCart = (product: (typeof allProducts)[0]) => {
     dispatch({
       type: "ADD_ITEM",
@@ -185,9 +186,9 @@ export function ProductsPage() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Catálogo de Productos</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">CatÃ¡logo de Productos</h1>
           <p className="text-slate-300">
-            Encuentra todos los componentes electrónicos que necesitas para tus proyectos
+            Encuentra todos los componentes electrÃ³nicos que necesitas para tus proyectos
           </p>
         </div>
 
@@ -316,7 +317,7 @@ export function ProductsPage() {
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-slate-400 text-lg">No se encontraron productos que coincidan con tu búsqueda</p>
+            <p className="text-slate-400 text-lg">No se encontraron productos que coincidan con tu bÃºsqueda</p>
           </div>
         )}
       </div>

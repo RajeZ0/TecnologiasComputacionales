@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { ShoppingCart, Plus, Minus, Trash2, CreditCard } from "lucide-react"
@@ -15,15 +15,51 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
   const { state, dispatch } = useCart()
   const [isCheckingOut, setIsCheckingOut] = useState(false)
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    if (state.items.length === 0) return
+
     setIsCheckingOut(true)
-    // Simulate checkout process
-    setTimeout(() => {
-      alert("¡Compra realizada con éxito! Gracias por tu pedido.")
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName: "Invitado",
+          items: state.items.map((item) => ({
+            id: item.id,
+            quantity: item.quantity,
+          })),
+        }),
+      })
+
+      if (!response.ok) {
+        const errorPayload = await response.json().catch(() => ({}))
+        throw new Error(errorPayload?.error ?? "No se pudo procesar la compra")
+      }
+
+      const { order, deliveryMessage } = await response.json()
+      const estimatedDate =
+        order?.estimatedDelivery != null ? new Date(order.estimatedDelivery).toLocaleDateString() : null
       dispatch({ type: "CLEAR_CART" })
-      setIsCheckingOut(false)
       onClose()
-    }, 2000)
+      window.alert(
+        [
+          `Compra realizada con exito. Tu numero de pedido es ${order.orderNumber}.`,
+          deliveryMessage ?? "Tu pedido llegara pronto.",
+          estimatedDate ? `Fecha estimada de entrega: ${estimatedDate}.` : null,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      )
+    } catch (error) {
+      console.error("Checkout failed", error)
+      window.alert(
+        error instanceof Error ? error.message : "No se pudo completar la compra. Intenta de nuevo mas tarde.",
+      )
+    } finally {
+      setIsCheckingOut(false)
+    }
   }
 
   if (!isOpen) return null
@@ -42,7 +78,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
               Carrito ({state.itemCount})
             </h3>
             <Button variant="ghost" size="sm" onClick={onClose} className="text-slate-400 hover:text-white">
-              ✕
+              Cerrar
             </Button>
           </div>
         </div>
@@ -51,7 +87,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
           {state.items.length === 0 ? (
             <div className="p-8 text-center">
               <ShoppingCart className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-              <p className="text-slate-400">Tu carrito está vacío</p>
+              <p className="text-slate-400">Tu carrito esta vacio</p>
               <p className="text-sm text-slate-500 mt-1">Agrega algunos productos para comenzar</p>
             </div>
           ) : (
@@ -122,6 +158,10 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
               <span className="text-lg font-semibold text-white">Total:</span>
               <span className="text-xl font-bold text-green-400">${state.total.toFixed(2)}</span>
             </div>
+
+            <p className="text-sm text-slate-400 mb-3">
+              Entrega estimada: 2 a 3 dias habiles (fecha exacta se confirma al finalizar la compra).
+            </p>
 
             <div className="space-y-2">
               <Button
